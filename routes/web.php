@@ -18,10 +18,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/login', [AuthController::class, 'login']);
-Route::get('/registration', [AuthController::class, 'registration']);
+Route::get('/login', [AuthController::class, 'login'])->middleware('alreadyLoggedIn');
+Route::get('/registration', [AuthController::class, 'registration'])->middleware('alreadyLoggedIn');
 Route::post('/register-user', [AuthController::class, 'registerUser'])->name('register-user');
 Route::post('login-user', [AuthController::class, 'loginUser'])->name('login-user');
-Route::get('/dashboard', [AuthController::class, 'dashboard']);
+Route::get('/dashboard', [AuthController::class, 'dashboard'])->middleware('isLoggedIn');
 Route::get('/logout', [AuthController::class, 'logout']);
 
